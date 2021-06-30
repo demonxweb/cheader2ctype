@@ -1,0 +1,76 @@
+
+
+union settime4 switch (time_how4 set_it) {
+    case SET_TO_CLIENT_TIME4:
+        nfstime4       time;
+    default:
+        void;
+};
+
+struct specdata4 {
+    uint32_t specdata1;
+    uint32_t specdata2;
+};
+struct fsid4 {
+    uint64_t        major;
+    uint64_t        minor;
+};
+struct fs_location4 {
+    utf8str_cis             server<>;
+    pathname4               rootpath;
+};
+struct fs_locations4 {
+    pathname4       fs_root;
+    fs_location4    locations<>;
+};
+struct fattr4 {
+    bitmap4         attrmask;
+    attrlist4       attr_vals;
+};
+struct change_info4 {
+    bool            atomic;
+    changeid4       before;
+    changeid4       after;
+};
+struct clientaddr4 {
+    string r_netid<>;
+    string r_addr<>;
+};
+struct cb_client4 {
+    uint    cb_program;
+    clientaddr4     cb_location;
+};
+struct nfs_client_id4 {
+    verifier4       verifier;
+    opaque          id<NFS4_OPAQUE_LIMIT>;
+};
+
+struct open_owner4 {
+    clientid4       clientid;
+    opaque          owner<NFS4_OPAQUE_LIMIT>;
+};
+struct lock_owner4 {
+    clientid4       clientid;
+    opaque          owner<NFS4_OPAQUE_LIMIT>;
+};
+struct open_to_lock_owner4 {
+    seqid4          open_seqid;
+    stateid4        open_stateid;
+    seqid4          lock_seqid;
+    lock_owner4     lock_owner;
+};
+struct stateid4 {
+    uint32_t        seqid;
+    opaque          other[NFS4_OTHER_SIZE];
+};
+struct nfsace4 {
+    acetype4                type;
+    aceflag4                flag;
+    acemask4                access_mask;
+    utf8str_mixed           who;
+};
+
+struct nfstime4 {
+    int64_t seconds;
+    uint32_t nseconds;
+};
